@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+.env
+.env.local
+*.log
+.DS_Store
+cms/.tmp
+cms/build
+cms/.cache
+cms/dist

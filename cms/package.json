@@ -1,0 +1,24 @@
+{
+  "name": "jw-show-cms",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@strapi/strapi": "4.25.24",
+    "@strapi/plugin-users-permissions": "4.25.24",
+    "@strapi/plugin-i18n": "4.25.24",
+    "pg": "8.11.3",
+    "better-sqlite3": "11.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=22.x.x"
+  },
+  "strapi": {
+    "uuid": "jw-show-cms"
+  }
+}
