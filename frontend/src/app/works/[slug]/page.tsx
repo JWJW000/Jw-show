@@ -87,7 +87,7 @@ export default async function WorkDetailPage({ params }: { params: { slug: strin
                 if (!url) return null;
                 return (
                   <Image
-                    key={img?.id ?? i}
+                    key={(img as { id?: number })?.id ?? i}
                     src={getStrapiMediaUrl(url)}
                     alt={`${attrs.title} - 图片 ${i + 1}`}
                     width={1120}
