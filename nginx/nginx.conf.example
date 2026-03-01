@@ -1,0 +1,41 @@
+# 部署到服务器时，将本文件复制到 Nginx 配置目录使用。
+# 假设：主站域名 www.yourdomain.com，后台子域 cms.yourdomain.com
+# 替换 yourdomain.com 为你的实际域名。
+# 前端映射到宿主机 3001 端口（避免与占用 3000 的服务冲突）。
+
+# 前端（主站）
+server {
+    listen 80;
+    server_name www.yourdomain.com yourdomain.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+# Strapi 后台与 API
+server {
+    listen 80;
+    server_name cms.yourdomain.com;
+
+    client_max_body_size 100M;
+
+    location / {
+        proxy_pass http://127.0.0.1:1337;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}

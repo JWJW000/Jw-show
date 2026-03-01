@@ -8,6 +8,7 @@
 Jw-show/
 ├── frontend/          # Next.js 14（App Router）
 ├── cms/               # Strapi 4 后台
+├── nginx/             # Nginx 配置示例（部署用）
 ├── docker-compose.yml
 ├── .env.example
 └── README.md
@@ -39,7 +40,7 @@ openssl rand -base64 32   # 用于 STRAPI_APP_KEYS 等
 docker compose up -d --build
 ```
 
-- **前端**：http://localhost:3000  
+- **前端**：http://localhost:3001  
 - **Strapi 后台**：http://localhost:1337/admin  
 
 首次访问 Strapi 后台会要求创建管理员账号，创建后登录。
@@ -90,16 +91,15 @@ npm run develop
 
 ## 部署到 Ubuntu 服务器
 
-1. 安装 Docker 与 Docker Compose  
-2. 克隆项目，配置 `.env`（强密码与密钥）  
-3. 执行：
-
+1. **安装 Docker 与 Docker Compose**，克隆项目，配置 `.env`（强密码与 Strapi 密钥）。
+2. **启动服务**：
    ```bash
    docker compose up -d --build
    ```
-
-4. 使用 Nginx 反向代理（可选）：将域名指向本机 `3000`（前端）和 `1337`（Strapi），并配置 HTTPS。  
-5. 前端如需在 SSR 中访问 Strapi，可设置 `STRAPI_INTERNAL_URL=http://cms:1337`（Docker 内网），`NEXT_PUBLIC_STRAPI_URL` 为对外访问 Strapi 的地址（如 `https://cms.你的域名.com`）。
+3. **配置 Nginx 反向代理与 HTTPS**：见 **[nginx/README.md](nginx/README.md)**。  
+   - 主站域名（如 `www.yourdomain.com`）→ 本机 3001（前端）  
+   - 后台子域（如 `cms.yourdomain.com`）→ 本机 1337（Strapi）  
+   - 在 `.env` 中设置 `NEXT_PUBLIC_STRAPI_URL=https://cms.yourdomain.com`，然后重新 `docker compose up -d --build` 前端。
 
 ## 技术栈
 

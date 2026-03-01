@@ -52,7 +52,7 @@ services:
     depends_on:
       - cms
     ports:
-      - "3000:3000"
+      - "3001:3000"
 
 volumes:
   strapi_db_data:
