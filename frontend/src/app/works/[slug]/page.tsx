@@ -83,7 +83,7 @@ export default async function WorkDetailPage({ params }: { params: { slug: strin
             <h2 style={{ fontSize: '1.125rem', marginBottom: '1rem', color: '#374151' }}>项目图片</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {images.map((img, i) => {
-                const url = img?.attributes?.url ?? img?.url;
+                const url = img?.attributes?.url ?? (img as { url?: string })?.url;
                 if (!url) return null;
                 return (
                   <Image
