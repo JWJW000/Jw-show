@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "access_logs",
+  "info": {
+    "singularName": "access-log",
+    "pluralName": "access-logs",
+    "displayName": "访问日志"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "work": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::work.work",
+      "inversedBy": "accessLogs"
+    },
+    "ip": {
+      "type": "string",
+      "required": true
+    },
+    "userAgent": {
+      "type": "string"
+    },
+    "referer": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    }
+  }
+}
