@@ -14,8 +14,7 @@
     "work": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::work.work",
-      "inversedBy": "accessLogs"
+      "target": "api::work.work"
     },
     "ip": {
       "type": "string",
