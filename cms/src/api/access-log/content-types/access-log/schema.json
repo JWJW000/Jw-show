@@ -28,6 +28,9 @@
     },
     "path": {
       "type": "string"
+    },
+    "location": {
+      "type": "string"
     }
   }
 }

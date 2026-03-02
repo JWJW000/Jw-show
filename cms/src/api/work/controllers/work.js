@@ -22,6 +22,25 @@ function logAccess(strapi, workId, ctx) {
     // 异步创建访问日志记录，不阻塞响应
     setImmediate(async () => {
       try {
+        // 尝试通过第三方服务解析 IP 所在地（仅用于方便查看，大致位置，可能不完全准确）
+        let location = '';
+        try {
+          if (ip && ip !== 'unknown') {
+            const res = await fetch(`https://ipapi.co/${ip}/json/`);
+            if (res.ok) {
+              const data = await res.json();
+              const parts = [
+                data.country_name,
+                data.region,
+                data.city,
+              ].filter(Boolean);
+              location = parts.join(' / ');
+            }
+          }
+        } catch (geoError) {
+          strapi.log.warn('Failed to resolve IP location:', geoError.message);
+        }
+
         await strapi.entityService.create('api::access-log.access-log', {
           data: {
             work: workId,
@@ -29,6 +48,7 @@ function logAccess(strapi, workId, ctx) {
             userAgent,
             referer,
             path,
+            location,
           },
         });
       } catch (error) {
