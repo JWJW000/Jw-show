@@ -20,13 +20,19 @@ function logAccess(strapi, workId, ctx) {
       'unknown';
 
     // 打印一份调试日志，方便确认头部与解析结果
-    strapi.log.info('Access log IP debug', {
-      ip,
-      xForwardedFor: xForwardedFor || null,
-      xRealIp: ctx.request.headers['x-real-ip'] || null,
-      requestIp: ctx.request.ip || null,
-      remoteAddress: ctx.request.socket?.remoteAddress || null,
-    });
+    try {
+      strapi.log.info(
+        `Access log IP debug: ${JSON.stringify({
+          ip,
+          xForwardedFor: xForwardedFor || null,
+          xRealIp: ctx.request.headers['x-real-ip'] || null,
+          requestIp: ctx.request.ip || null,
+          remoteAddress: ctx.request.socket?.remoteAddress || null,
+        })}`
+      );
+    } catch (e) {
+      strapi.log.info('Access log IP debug (stringify failed)');
+    }
 
     // 获取其他请求信息
     const userAgent = ctx.request.headers['user-agent'] || '';
