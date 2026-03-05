@@ -13,7 +13,7 @@ function logAccess(strapi, workId, ctx) {
       xForwardedFor?.split(',')[0]?.trim() ||
       ctx.request.headers['x-real-ip'];
 
-    const ip =
+    let ip =
       realIpFromHeader ||
       ctx.request.ip ||
       ctx.request.socket?.remoteAddress ||
@@ -21,6 +21,23 @@ function logAccess(strapi, workId, ctx) {
 
     // 打印一份调试日志，方便确认头部与解析结果
     try {
+      // 区分：如果没有任何代理头，很可能是容器内部调用（例如 frontend → cms），这类访问不代表真实用户 IP
+      const isInternalCall = !realIpFromHeader;
+
+      if (isInternalCall) {
+        strapi.log.info(
+          `Access log IP debug (internal call): ${JSON.stringify({
+            ip,
+            xForwardedFor: xForwardedFor || null,
+            xRealIp: ctx.request.headers['x-real-ip'] || null,
+            requestIp: ctx.request.ip || null,
+            remoteAddress: ctx.request.socket?.remoteAddress || null,
+          })}`
+        );
+        // 内部调用直接返回，不记录到 access-log 表里，避免把容器 IP 当成用户 IP
+        return;
+      }
+
       strapi.log.info(
         `Access log IP debug: ${JSON.stringify({
           ip,
