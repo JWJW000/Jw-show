@@ -1,3 +1,4 @@
+
 FROM node:20-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./
@@ -8,6 +9,8 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+ARG NEXT_PUBLIC_OSS_DOMAIN
+ENV NEXT_PUBLIC_OSS_DOMAIN=$NEXT_PUBLIC_OSS_DOMAIN
 RUN npm run build
 
 FROM node:20-alpine AS runner

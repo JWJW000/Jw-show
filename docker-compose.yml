@@ -38,6 +38,8 @@ services:
       OSS_ACCESS_KEY_SECRET: ${OSS_ACCESS_KEY_SECRET}
       OSS_REGION: ${OSS_REGION}
       OSS_BUCKET: ${OSS_BUCKET}
+      OSS_BASE_URL: ${OSS_BASE_URL}
+      OSS_PUBLIC_HOST: ${OSS_PUBLIC_HOST}
     volumes:
       - strapi_uploads:/app/public/uploads
     depends_on:
@@ -50,8 +52,11 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_OSS_DOMAIN: ${NEXT_PUBLIC_OSS_DOMAIN}
     restart: unless-stopped
     environment:
+      NEXT_PUBLIC_OSS_DOMAIN: ${NEXT_PUBLIC_OSS_DOMAIN}
       NEXT_PUBLIC_STRAPI_URL: http://localhost:1337
       STRAPI_INTERNAL_URL: http://cms:1337
     depends_on:
