@@ -12,6 +12,8 @@
     "@strapi/strapi": "4.25.24",
     "@strapi/plugin-users-permissions": "4.25.24",
     "@strapi/plugin-i18n": "4.25.24",
+    "@strapi/plugin-upload": "4.25.24",
+    "@strapi/provider-upload-ali-oss": "4.25.24",
     "pg": "8.11.3",
     "better-sqlite3": "11.5.0"
   },
