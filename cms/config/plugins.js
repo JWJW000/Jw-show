@@ -21,7 +21,7 @@ module.exports = ({ env }) => ({
         secure: env.bool('OSS_SECURE', true),
         internal: env.bool('OSS_INTERNAL', false),
         bucketParams: {
-          ACL: env('OSS_BUCKET_ACL', 'private'),
+          ACL: env('OSS_BUCKET_ACL', 'public-read'),
           signedUrlExpires: env.int('OSS_SIGNED_URL_EXPIRES', 60 * 60),
         },
       },
