@@ -7,12 +7,17 @@ function logAccess(strapi, workId, ctx) {
   if (!workId) return;
 
   try {
-    // 获取客户端 IP 地址
-    const ip = ctx.request.ip || 
-               ctx.request.headers['x-forwarded-for']?.split(',')[0]?.trim() || 
-               ctx.request.headers['x-real-ip'] || 
-               ctx.request.socket?.remoteAddress || 
-               'unknown';
+    // 获取客户端 IP 地址（优先使用反向代理传递的真实 IP）
+    const xForwardedFor = ctx.request.headers['x-forwarded-for'];
+    const realIpFromHeader =
+      xForwardedFor?.split(',')[0]?.trim() ||
+      ctx.request.headers['x-real-ip'];
+
+    const ip =
+      realIpFromHeader ||
+      ctx.request.ip ||
+      ctx.request.socket?.remoteAddress ||
+      'unknown';
 
     // 获取其他请求信息
     const userAgent = ctx.request.headers['user-agent'] || '';
