@@ -28,6 +28,8 @@ const nextConfig = {
   output: 'standalone',
   images: {
     remotePatterns,
+    // 禁用 Next 内置图片优化，直接使用远程图片地址
+    unoptimized: true,
   },
 };
 

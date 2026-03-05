@@ -5,6 +5,9 @@ import './globals.css';
 export const metadata: Metadata = {
   title: '作品展示',
   description: '个人作品展示平台',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({
