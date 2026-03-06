@@ -23,6 +23,9 @@
     "description": {
       "type": "text"
     },
+    "content": {
+      "type": "richtext"
+    },
     "link": {
       "type": "string"
     },

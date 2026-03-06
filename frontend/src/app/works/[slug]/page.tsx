@@ -29,6 +29,7 @@ export default async function WorkDetailPage({ params }: { params: { slug: strin
   const attrs = work.attributes as {
     title: string;
     description?: string;
+    content?: string;
     link?: string;
     year?: string;
     cover?: { data?: { attributes?: { url: string } } | null };
@@ -72,6 +73,13 @@ export default async function WorkDetailPage({ params }: { params: { slug: strin
               {attrs.description}
             </ReactMarkdown>
           </div>
+        )}
+        {attrs.content && (
+          <div
+            className="content"
+            style={{ marginTop: '1.5rem' }}
+            dangerouslySetInnerHTML={{ __html: attrs.content }}
+          />
         )}
         {attrs.link && (
           <p>
