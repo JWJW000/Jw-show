@@ -14,7 +14,7 @@ export default async function AboutPage() {
     return (
       <div className="container about-section">
         <h1 className="page-title">关于</h1>
-        <p className="bio">暂无介绍。请在 Strapi 后台「关于」中填写内容。</p>
+        <p className="bio">暂无介绍</p>
       </div>
     );
   }
