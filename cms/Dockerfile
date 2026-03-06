@@ -9,13 +9,13 @@ RUN npm install
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ENV NODE_ENV=production
+ENV NODE_ENV=develop
 RUN npm run build
 
 FROM node:20-alpine AS runner
 RUN apk add --no-cache vips vips-dev
 WORKDIR /app
-ENV NODE_ENV=production
+ENV NODE_ENV=develop
 RUN addgroup --system --gid 1001 strapi && adduser --system --uid 1001 strapi
 COPY --from=builder /app/package.json ./
 COPY --from=builder /app/node_modules ./node_modules
