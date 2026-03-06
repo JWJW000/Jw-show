@@ -20,6 +20,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     environment:
+      STRAPI_DISABLE_PROMPTS: "true"
       HOST: 0.0.0.0
       PORT: 1337
       APP_KEYS: ${STRAPI_APP_KEYS}

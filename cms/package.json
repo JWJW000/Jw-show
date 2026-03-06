@@ -17,7 +17,11 @@
     "strapi-provider-upload-oss": "0.2.1",
     "strapi-plugin-wysiwyg-react-md-editor": "4.5.3",
     "pg": "8.11.3",
-    "better-sqlite3": "11.5.0"
+    "better-sqlite3": "11.5.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.2.1"
   },
   "engines": {
     "node": ">=18.0.0 <=22.x.x"
