@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { getWorkBySlug, getWorks, getStrapiMediaUrl } from '@/lib/cms';
 
 export async function generateStaticParams() {
@@ -65,7 +67,11 @@ export default async function WorkDetailPage({ params }: { params: { slug: strin
           {attrs.year && <span> · {attrs.year}</span>}
         </div>
         {attrs.description && (
-          <div className="description">{attrs.description}</div>
+          <div className="description">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {attrs.description}
+            </ReactMarkdown>
+          </div>
         )}
         {attrs.link && (
           <p>

@@ -33,13 +33,6 @@ services:
       DATABASE_NAME: ${POSTGRES_DB:-strapi}
       DATABASE_USERNAME: ${POSTGRES_USER:-strapi}
       DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-strapi}
-
-      OSS_ACCESS_KEY_ID: ${OSS_ACCESS_KEY_ID}
-      OSS_ACCESS_KEY_SECRET: ${OSS_ACCESS_KEY_SECRET}
-      OSS_REGION: ${OSS_REGION}
-      OSS_BUCKET: ${OSS_BUCKET}
-      OSS_BASE_URL: ${OSS_BASE_URL}
-      OSS_PUBLIC_HOST: ${OSS_PUBLIC_HOST}
     volumes:
       - strapi_uploads:/app/public/uploads
     depends_on:
@@ -52,14 +45,9 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-      args:
-        NEXT_PUBLIC_OSS_DOMAIN: ${NEXT_PUBLIC_OSS_DOMAIN}
     restart: unless-stopped
     environment:
-      NEXT_PUBLIC_OSS_DOMAIN: ${NEXT_PUBLIC_OSS_DOMAIN}
-      # 浏览器访问 Strapi 的公网地址（走 Nginx，才能拿到真实客户端 IP）
-      NEXT_PUBLIC_STRAPI_URL: https://cms.5wjw.cn
-      # 前端容器内部访问 Strapi 的地址（仅服务器端渲染 / 构建用）
+      NEXT_PUBLIC_STRAPI_URL: http://localhost:1337
       STRAPI_INTERNAL_URL: http://cms:1337
     depends_on:
       - cms
