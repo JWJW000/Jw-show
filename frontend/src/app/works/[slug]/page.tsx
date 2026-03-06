@@ -75,11 +75,11 @@ export default async function WorkDetailPage({ params }: { params: { slug: strin
           </div>
         )}
         {attrs.content && (
-          <div
-            className="content"
-            style={{ marginTop: '1.5rem' }}
-            dangerouslySetInnerHTML={{ __html: attrs.content }}
-          />
+          <div className="content" style={{ marginTop: '1.5rem' }}>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {attrs.content}
+            </ReactMarkdown>
+          </div>
         )}
         {attrs.link && (
           <p>
