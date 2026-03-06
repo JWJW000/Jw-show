@@ -33,6 +33,12 @@ services:
       DATABASE_NAME: ${POSTGRES_DB:-strapi}
       DATABASE_USERNAME: ${POSTGRES_USER:-strapi}
       DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-strapi}
+      SMTP_HOST: smtp.qq.com
+      SMTP_PORT: 465
+      SMTP_USERNAME: 848810436@qq.com
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SMTP_DEFAULT_FROM: "JW Show <848810436@qq.com>"
+      SMTP_DEFAULT_REPLY_TO: 848810436@qq.com
     volumes:
       - strapi_uploads:/app/public/uploads
     depends_on:

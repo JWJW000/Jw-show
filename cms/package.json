@@ -14,6 +14,7 @@
     "@strapi/plugin-i18n": "4.25.24",
     "@strapi/plugin-upload": "4.25.24",
     "strapi-provider-upload-oss": "0.2.1",
+    "strapi-plugin-wysiwyg-react-md-editor": "4.5.3",
     "pg": "8.11.3",
     "better-sqlite3": "11.5.0"
   },

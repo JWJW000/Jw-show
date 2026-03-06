@@ -31,4 +31,22 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  email: {
+    config: {
+      provider: 'nodemailer',
+      providerOptions: {
+        host: env('SMTP_HOST', 'smtp.qq.com'),
+        port: env.int('SMTP_PORT', 465),
+        secure: true,
+        auth: {
+          user: env('SMTP_USERNAME'),
+          pass: env('SMTP_PASSWORD'),
+        },
+      },
+      settings: {
+        defaultFrom: env('SMTP_DEFAULT_FROM', '848810436@qq.com'),
+        defaultReplyTo: env('SMTP_DEFAULT_REPLY_TO', '848810436@qq.com'),
+      },
+    },
+  },
 });
