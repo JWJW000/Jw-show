@@ -2,6 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getWorks, getStrapiMediaUrl } from '@/lib/cms';
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   let works: { id: number; attributes: Record<string, unknown> }[] = [];
   try {
