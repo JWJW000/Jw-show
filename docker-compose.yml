@@ -39,6 +39,13 @@ services:
       SMTP_PASSWORD: ${SMTP_PASSWORD}
       SMTP_DEFAULT_FROM: "JW Show <848810436@qq.com>"
       SMTP_DEFAULT_REPLY_TO: 848810436@qq.com
+
+      OSS_ACCESS_KEY_ID: ${OSS_ACCESS_KEY_ID}
+      OSS_ACCESS_KEY_SECRET: ${OSS_ACCESS_KEY_SECRET}
+      OSS_REGION: ${OSS_REGION}
+      OSS_BUCKET: ${OSS_BUCKET}
+      OSS_BASE_URL: ${OSS_BASE_URL}
+      OSS_PUBLIC_HOST: ${OSS_PUBLIC_HOST}
     volumes:
       - strapi_uploads:/app/public/uploads
     depends_on:
